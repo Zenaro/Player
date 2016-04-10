@@ -1,0 +1,265 @@
+@color: #369;
+@btn-size: 40px;
+* { margin: 0;padding: 0; font-family: "微软雅黑"; font-size: 14px;}
+.audio-player a, .audio-player i, .audio-player em {
+  display: block;
+  float: left;
+  text-decoration: none;
+  font-style: normal;
+}
+.v-center(@w, @h) {  /* 居中属性 */
+  width: @w;
+  height: @h;
+  position: absolute;
+  margin: -@h/2 0 0 -@w/2;
+  left: 50%;
+  top: 50%;
+}
+
+.audio-player {
+  width: 1px;
+  height: 1px;
+  position: absolute;
+  left: 60px;
+  bottom: 200px;
+  .center-btn {
+    background: #333;
+    border-radius: 50%;
+    .v-center(3*@btn-size, 3*@btn-size);
+//    > .radius-list {
+//      width: 60px;
+//      height: 30px;
+//      position: absolute;
+//      top: 50%;
+//      left: 50%;
+//      margin: -10px 0 0 -25px;
+//      > a.icon-list {
+//        width: 60px;
+//        height: 30px;
+//        color: #888;
+//        text-indent: 32px;
+//        line-height: 30px;
+//        background: url('../../images/player/playbar.png');
+//        background-position: -40px -66px;
+//        &:hover {
+//          color: #aaa;
+//          background-position: -40px -96px;
+//        }
+//      }
+//    }
+  }
+  .slide {
+    width: 810px;
+    height: 50px;
+    background: #333;
+    position: absolute;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    left: 40px;
+    top: -10px;
+    .play-btns {
+      width: 120px;
+      height: 100%;
+      float: left;
+      margin-left: 30px;
+      > a {
+        width: 28px;
+        height: 28px;
+        background: url('../../images/player/playbar.png');
+        &.prv {
+          margin: 11px 0;
+          background-position: 0 -129px;
+        }
+        &.play-ply, &.play-pas {
+          width: 36px;
+          height: 36px;
+          margin: 7px;
+        }
+        &.play-ply {
+          background-position: 0 -204px;
+        }
+        &.play-pas {
+          background-position: 0 -165px;
+        }
+        &.nxt {
+          margin: 11px 0;
+          background-position: -80px -129px;
+        }
+        &.prv:hover { background-position: -30px -129px; }
+        &.play-ply:hover { background-position: -40px -204px; }
+        &.play-pas:hover { background-position: -40px -165px; }
+        &.nxt:hover { background-position: -110px -129px;}
+      }
+    }
+    .play-head {
+      width: 30px;
+      height: 30px;
+      float: left;
+      margin: 6px 10px;
+      padding: 2px;
+      background: url('../../images/player/playbar.png');
+      background-position: 0 -80px;
+      > a > img {
+        width: 30px;
+      }
+    }
+    .play-ing {
+      width: 510px;
+      height: 100%;
+      padding: 0 5px;
+      float: left;
+      > .ptitle {
+        width: 100%;
+        height: 28px;
+        line-height: 28px;
+        > a {
+          color: #ddd;
+          float: left;
+          margin: 0 5px;
+          &.singer {
+            color: #999;
+            padding: 0 10px;
+          }
+          &:hover { text-decoration: underline; }
+        }
+      }
+      > .pbar { /* ---歌曲进度框 ---*/
+        width: 100%;
+        height: 10px;
+        padding: 5px 0;
+        > .barbg {      /*总进度条*/
+          width: 415px;
+          height: 100%;
+          float: left;
+          position: relative;
+          background: url('../../images/player/linebar.png');
+          background-position: right 0;
+          > .rdy {      /*灰色缓冲条*/
+            width: 0;
+            height: 100%;
+            background: url('../../images/player/linebar.png');
+            background-position: right -30px;
+          }
+          > .cur {      /*当前条*/
+            width: 400px;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            > .cur-inner {
+              width: 0;
+              height: 100%;
+              position: absolute;
+              background: url('../../images/player/linebar.png');
+              background-position: left -66px;
+              > span.btn-cur {
+                width: 21px;
+                height: 21px;
+                top: -8px;
+                right: -16px;
+                position: absolute;
+                background: url('../../images/player/iconall.png');
+                background-position: 0 -250px;
+                > i{
+                  width: 12px;
+                  height: 12px;
+                  position: absolute;
+                  left: 5px;
+                  top: 5px;
+                  display: none;
+                  background: url('../../images/player/loading.gif');
+                }
+              }
+            }
+          }
+        }
+        > span.clock {
+          height: 100%;
+          display: block;
+          float: right;
+          color: #888;
+          line-height: 8px;
+          font-size: 12px;
+          > i {
+            display: inline;
+            float: none;
+            color: #ccc;
+          }
+          > em {
+            float: none;
+            display: inline;
+          }
+        }
+      }
+    }
+    .play-ctrl {
+      width: 55px;
+      height: 100%;
+      padding: 0 10px;
+      float: left;
+      position: relative;
+      > .cbar {
+        display: none;
+        position: absolute;
+        top: -110px;
+        left: 8px;
+        width: 32px;
+        height: 90px;
+        padding: 10px 0;
+        background: url('../../images/player/playbar.png');
+        background-position: 0 -507px;
+        > .barbg {
+          width: 100%;
+          height: 88px;
+          position: absolute;
+          top: 11px;
+          > .cur {
+            width: 4px;
+            height: 0;
+            left: 15px;
+            bottom: 0;
+            position: absolute;
+            background: url('../../images/player/playbar.png');
+            background-position: -40px bottom;
+            > span {
+              width: 18px;
+              height: 18px;
+              top: -12px;
+              left: -7px;
+              position: absolute;
+              background: url('../../images/player/iconall.png');
+              background-position: -40px -250px;
+            }
+          }
+        }
+      }
+      > a {
+        width: 24px;
+        height: 24px;
+        margin: 13px 1px;
+        float: left;
+        background: url('../../images/player/playbar.png');
+        &.icon-vol { background-position: -2px -248px; }
+        &.icon-shuffle { background-position: -66px -248px; }
+        &.icon-loop { background-position: -3px -344px; }
+        &.icon-one { background-position: -66px -344px; }
+        &.icon-vol:hover { background-position: -31px -248px; }
+        &.icon-shuffle:hover { background-position: -93px -248px; }
+        &.icon-loop:hover { background-position: -33px -344px; }
+        &.icon-one:hover { background-position: -93px -344px; }
+      }
+      > .lop-hint {
+        top: -35px;
+        left: -10px;
+        width: 82px;
+        height: 40px;
+        color: #eee;
+        display: none;
+        position: absolute;
+        line-height: 35px;
+        text-align: center;
+        background: url('../../images/player/playbar.png');
+        background-position: 0 -457px;
+      }
+    }
+  }
+}
