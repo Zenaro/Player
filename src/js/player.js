@@ -193,7 +193,7 @@ define(function (require, exports, module) {
             playIng = $('<div>').addClass('play-ing'),      // 进度条
             playCtrl = $('<div>').addClass('play-ctrl');    // 调节按钮
 
-        var html = '<a href="javascript:;" class="icon-list" title="播放列表">0</a>';
+        var html = '<a href="javascript:;" class="icon-list" title="播放列表"></a>';
         centerList.append(html);
 
         html = '<a href="javascript:;" class="prv" title="上一首"></a>' +
