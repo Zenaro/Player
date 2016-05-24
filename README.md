@@ -105,3 +105,4 @@ define(function (require, exports, module) {
     }
 });
 ```
+需要了解具体的代码实现的同学再自行翻开源代码啦。由于技术未深，有错误的地方烦请批评指正
