@@ -27,11 +27,12 @@ define(function (require, exports, module) {
 
     // ------- private -------
 
-    Player.prototype.init = function (data) {   // data.src, data.name, data.master
+    Player.prototype.init = function (data_id) {   // data.src, data.name, data.master
         $('.play-ing .pbar .cur .cur-inner').width(0);
-        $('.play-ing .ptitle a.title').html(data.name);
-        $('.play-ing .ptitle a.singer').html(data.master);
-        this.audio.src = data.src;
+        $('.play-ing .ptitle a.title').html(this.json[data_id].name);
+        $('.play-ing .ptitle a.singer').html(this.json[data_id].master);
+        $(this.audio).attr('data-id', data_id);
+        this.audio.src = this.json[data_id].src;
         this.audio.play();
     };
 
@@ -51,7 +52,7 @@ define(function (require, exports, module) {
         $(this.global).on('click', '.play-btns a.play', function() {
 
             if(self.audio.src === '') {
-                self.prvTrack = self.curTrack = self.json[2];
+                self.prvTrack = self.curTrack = 0;
                 self.init(self.curTrack);
 
             } else {
@@ -66,14 +67,18 @@ define(function (require, exports, module) {
 
             if (self.nxtTrack !== null) {   // 若有下一曲的记录 (如之前点击过上一曲)
                 self.init(self.nxtTrack);
-                self.nxtTrack = null;
+                console.log('next');
             } else {
-                var i = ~~ (Math.random() * self.json.length);
+                var i = ~~($(self.audio).attr('data-id')) + 1;
+                (i >= self.json.length) ? i = 0 : null;
+
+                self.loopType === 3 && (i = ~~ (Math.random() * self.json.length)); // 若需要随机播放
+
                 self.prvTrack = self.curTrack;
-                self.curTrack = self.json[i];
-                self.nxtTrack = null;
+                self.curTrack = i;
                 self.init(self.curTrack);
             }
+            self.nxtTrack = null;
 
         }).on('click', '.play-ing .pbar .barbg', function(event) {
 
@@ -125,7 +130,7 @@ define(function (require, exports, module) {
         }, '.play-ctrl a#icn-lop');
 
 
-        // ----- audio事件委托
+        // ----- audio多媒体事件委托
         $(this.audio).on('canplay', function() {
 
             $('.play-ing .pbar .cur span.btn-cur i').hide();
@@ -170,7 +175,7 @@ define(function (require, exports, module) {
             if (self.audio.loop === false) {
                 var i = ~~ (Math.random() * self.json.length);
                 self.prvTrack = self.curTrack;
-                self.curTrack = self.json[i];
+                self.curTrack = i;
                 self.nxtTrack = null;
                 self.init(self.curTrack);
             }
@@ -187,16 +192,19 @@ define(function (require, exports, module) {
         var centerBtn = $("<div>").addClass('center-btn'),  // 中心按钮
             slide = $("<div>").addClass('slide');           // 延伸条
 
-        var centerList = $('<div>').addClass('radius-list'),    // 列表按钮
-            playBtns = $('<div>').addClass('play-btns'),    // 三按钮
+        var playBtns = $('<div>').addClass('play-btns'),    // 三按钮
             playHead = $('<div>').addClass('play-head'),    // img
             playIng = $('<div>').addClass('play-ing'),      // 进度条
             playCtrl = $('<div>').addClass('play-ctrl');    // 调节按钮
 
+<<<<<<< HEAD
+        var html = '<a href="javascript:;" class="prv" title="上一首"></a>' +
+=======
         var html = '<a href="javascript:;" class="icon-list" title="播放列表"></a>';
         centerList.append(html);
 
         html = '<a href="javascript:;" class="prv" title="上一首"></a>' +
+>>>>>>> 134e968a1403633b70cb183d2512ec360f3b8f3f
                 '<a href="javascript:;" class="play play-ply" title="播放"></a>' +
                 '<a href="javascript:;" class="nxt" title="下一首"></a>';
         playBtns.append(html);
@@ -233,7 +241,6 @@ define(function (require, exports, module) {
                 '<div class="lop-hint">单曲循环</div>';
         playCtrl.append(html);
 
-        centerBtn.append(centerList);
         slide.append(playBtns).append(playHead).append(playIng).append(playCtrl);
         this.global.append(centerBtn).append(slide);
         $('body').prepend(this.global);
@@ -241,6 +248,7 @@ define(function (require, exports, module) {
         this.audio = $("<audio>").appendTo(this.global).hide();
         this.audio = this.audio[0];     // 选取audio标签的第0个索引
         this.audio.volume = 0.5;
+
     };
 
 
