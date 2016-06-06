@@ -1,6 +1,6 @@
 # Player
 先前接到了个关于音乐素材的项目，里面的核心是音乐插件。然而花了个寒假打出来后，效果还是不满意。后来我把播放器插件单独拿出来重新优化。便有了这个小项目，这是笔者目前的所针对的优化方案。
-我主要是针对HTML5的 [audio](http://www.w3school.com.cn/jsref/dom_obj_audio.asp) 标签进行 DOM 和 UI 的优化，话不多磕叨，上图先~
+我主要是针对HTML5的 [audio](http://www.w3school.com.cn/jsref/dom_obj_audio.asp) 标签进行 DOM 和 UI 的优化，话不多说，上图先~
 
 ![Z-Player](http://7xstax.com1.z0.glb.clouddn.com/player.png)
 
